@@ -4,18 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>猪林箭大傻逼 | Monkey Coder</title>
+  <title>iOS – NSUserDefaults | Monkey Coder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比">
+  <meta name="description" content="NSUserDefaults适用于存储轻量级的本地数据，例如用户的登录名，密码，URL之类的。
+
+使用NSUserDefaults存储基本数据类型NSUserDefaults支持的数据类型有floats, doubles, integers, Booleans, and URLs 也支持NSData, NSString, NSNumber, NSDate, NSArray, or NSDictio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="猪林箭大傻逼">
-<meta property="og:url" content="http://yoursite.com/2016/02/06/猪林箭大傻逼/index.html">
+<meta property="og:title" content="iOS – NSUserDefaults">
+<meta property="og:url" content="http://yoursite.com/2016/03/11/iOS-–-NSUserDefaults/index.html">
 <meta property="og:site_name" content="Monkey Coder">
-<meta property="og:description" content="猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比">
-<meta property="og:updated_time" content="2016-02-06T13:43:48.000Z">
+<meta property="og:description" content="NSUserDefaults适用于存储轻量级的本地数据，例如用户的登录名，密码，URL之类的。
+
+使用NSUserDefaults存储基本数据类型NSUserDefaults支持的数据类型有floats, doubles, integers, Booleans, and URLs 也支持NSData, NSString, NSNumber, NSDate, NSArray, or NSDictio">
+<meta property="og:updated_time" content="2016-03-11T03:48:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="猪林箭大傻逼">
-<meta name="twitter:description" content="猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比">
+<meta name="twitter:title" content="iOS – NSUserDefaults">
+<meta name="twitter:description" content="NSUserDefaults适用于存储轻量级的本地数据，例如用户的登录名，密码，URL之类的。
+
+使用NSUserDefaults存储基本数据类型NSUserDefaults支持的数据类型有floats, doubles, integers, Booleans, and URLs 也支持NSData, NSString, NSNumber, NSDate, NSArray, or NSDictio">
   
     <link rel="alternative" href="/atom.xml" title="Monkey Coder" type="application/atom+xml">
   
@@ -193,11 +199,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="[post]-猪林箭大傻逼" class="article article-type-[post]" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS-–-NSUserDefaults" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/06/猪林箭大傻逼/" class="article-date">
-  	<time datetime="2016-02-06T13:43:17.000Z" itemprop="datePublished">2016-02-06</time>
+      <a href="/2016/03/11/iOS-–-NSUserDefaults/" class="article-date">
+  	<time datetime="2016-03-11T03:45:52.000Z" itemprop="datePublished">2016-03-11</time>
 </a>
     </div>
   
@@ -210,7 +216,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      猪林箭大傻逼
+      iOS – NSUserDefaults
     </h1>
   
 
@@ -226,7 +232,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比猪林箭大晒比</p>
+        <blockquote>
+<p>NSUserDefaults适用于存储轻量级的本地数据，例如用户的登录名，密码，URL之类的。</p>
+</blockquote>
+<h3 id="u4F7F_u7528NSUserDefaults_u5B58_u50A8_u57FA_u672C_u6570_u636E_u7C7B_u578B"><a href="#u4F7F_u7528NSUserDefaults_u5B58_u50A8_u57FA_u672C_u6570_u636E_u7C7B_u578B" class="headerlink" title="使用NSUserDefaults存储基本数据类型"></a>使用NSUserDefaults存储基本数据类型</h3><p>NSUserDefaults支持的<strong>数据类型</strong>有floats, doubles, integers, Booleans, and URLs 也支持NSData, NSString, NSNumber, NSDate, NSArray, or NSDictionary。</p>
+<p>如果要在NSUserDefaults存储这些数据类型的话，很简单就可以实现</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化的一个全局的NSUserDefaults</span></span><br><span class="line">public <span class="tag">var</span> userDefault: NSUserDefaults = <span class="function"><span class="title">NSUserDefaults</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将用户名和密码存入NSUserDefaults中</span></span><br><span class="line">userDefault.<span class="function"><span class="title">setObject</span><span class="params">(<span class="string">"axxt"</span>, forKey: <span class="string">"user_name"</span>)</span></span></span><br><span class="line">userDefault.<span class="function"><span class="title">setObject</span><span class="params">(<span class="string">"09876654321"</span>, forKey: <span class="string">"user_password"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从NSUserDefaults取出用户名和密码</span></span><br><span class="line">let name = userDefault.<span class="function"><span class="title">stringForKey</span><span class="params">(<span class="string">"user_name"</span>)</span></span></span><br><span class="line">let password = userDefault.<span class="function"><span class="title">stringForKey</span><span class="params">(<span class="string">"user_password"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>上面这个例子可以用于记住密码功能</p>
+<p>在Apple的官方文档中有一段这样的话</p>
+<blockquote>
+<p>Values returned from NSUserDefaults are immutable, even if you set a mutable object as the value. For example, if you set a mutable string as the value for “MyStringDefault”, the string you later retrieve using stringForKey: will be immutable.</p>
+</blockquote>
+<p>说明NSUserDefaults的存储对象是不可变的，如果不遵守这个规则程序就出现bug，如果要存储一个可变的数组，必须把它转变成不可变的数组再存入NSUserDefaults</p>
+<h3 id="u4F7F_u7528NSUserDefaults_u5B58_u50A8_u5176_u4ED6_u5BF9_u8C61"><a href="#u4F7F_u7528NSUserDefaults_u5B58_u50A8_u5176_u4ED6_u5BF9_u8C61" class="headerlink" title="使用NSUserDefaults存储其他对象"></a>使用NSUserDefaults存储其他对象</h3><p>有一个场景，基本上APP都会有个人信息一栏，其中的个人头像其实也可以存储在NSUserDefaults，从服务器获取到的头像载入到移动端，可以将UIImage转化成NSData，存到本地。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将图片信息存储在NSUserDefault</span></span><br><span class="line">let imageData = <span class="built_in">UIImagePNGRepresentation</span>(img)</span><br><span class="line">userDefault<span class="variable">.setObject</span>(imageData, forKey: <span class="string">"iconImage"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从NSUserDefault取出图片的NSData信息，数据持久化存储</span></span><br><span class="line">let imageData:<span class="built_in">NSData</span>? = userDefault<span class="variable">.dataForKey</span>(<span class="string">"iconImage"</span>)</span><br><span class="line"><span class="keyword">if</span> imageData != <span class="literal">nil</span> &#123;</span><br><span class="line">iconBtn<span class="variable">.setImage</span>(<span class="built_in">UIImage</span>(data: imageData!), forState: <span class="variable">.Normal</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>使用NSUserDefaults存储数据是最直接、最简单的方式</p>
 
       
     </div>
@@ -237,8 +256,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2016/02/04/年终总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">年终总结</div>
+    <a href="/2016/02/02/A-Monkey-Coder/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">A Monkey Coder</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -273,7 +292,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="猪林箭大傻逼" data-title="猪林箭大傻逼" data-url="http://yoursite.com/2016/02/06/猪林箭大傻逼/"></div>
+	<div class="ds-thread" data-thread-key="iOS-–-NSUserDefaults" data-title="iOS – NSUserDefaults" data-url="http://yoursite.com/2016/03/11/iOS-–-NSUserDefaults/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
