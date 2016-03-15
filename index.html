@@ -194,11 +194,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-iOS-头像更换" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-头像更换引发的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/14/iOS-头像更换/" class="article-date">
-  	<time datetime="2016-03-14T05:54:00.000Z" itemprop="datePublished">2016-03-14</time>
+      <a href="/2016/03/15/头像更换引发的一些问题/" class="article-date">
+  	<time datetime="2016-03-15T12:52:53.000Z" itemprop="datePublished">2016-03-15</time>
 </a>
     </div>
   
@@ -211,7 +211,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/14/iOS-头像更换/">iOS--头像更换</a>
+      <a class="article-title" href="/2016/03/15/头像更换引发的一些问题/">头像更换引发的一些问题</a>
     </h1>
   
 
@@ -220,7 +220,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>今天改了一个需求，是对客户端的用户头像进行更换，之前用户头像是写死的，现在要做的是从服务端获取头像，然后显示在客户端上面。看是一个简单的需求，折磨了我一天，心累呀   ~~ (&gt;_&lt;) ~~ 说到底还是基本功不扎实</p>
+<p>要是说服务端那边发过来一个头像的URL，更换头像不是分分钟搞定，但是偏偏不巧的是服务端的同事传来的数据流，一开始我愣是没搞懂什么是数据流，数据结构这些我还真不是很清楚。</p>
+<p>屁颠屁颠的在网上搜资料，如何将byte数组转化成image，结果看过来看过去搜到内容都差不多，都是先把byte数组转化成NSData，再由NSData转化成UIImage</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OC版:</span><br><span class="line">Byte byte[] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">20</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>&#125;;</span><br><span class="line">NSData *imageData = [[NSData alloc] initWithBytes:byte length:<span class="number">24</span>];</span><br><span class="line">UIImage *image = [UIImage imageWithData: imageData];</span><br></pre></td></tr></table></figure>
+<p>看起来简简单单一个方法，我写成swift版的怎么就是现实不了</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是错误版转换</span></span><br><span class="line">let imageByte = jsonData[<span class="string">"info"</span>]<span class="class">.arrayValue</span></span><br><span class="line">let imageData = NSData.<span class="function"><span class="title">init</span><span class="params">(bytes: imageByte, length: imageByte.count)</span></span></span><br><span class="line">iconView<span class="class">.image</span> = <span class="function"><span class="title">UIImage</span><span class="params">(data: imageData)</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>上面这个是错误的代码</strong></p>
+<p>我一开始的理解是先将数据从json解析出来，我错误的认为byte数据流是一个整数型的数组，然后直接将这个数组序列化，结果可想而知，序列化就出现了问题，不能正常的得到图片</p>
+<p>用我蹩脚的英语在Stack Overflow搜了半天了没有得到答案，又陷入苦思冥想中。。。</p>
+<p>就在快要下班的时候，我在王巍的Swift必备tips的<a href="http://swifter.tips/sizeof-sizeofvalue/" target="_blank" rel="external">这里</a>看到了这里两段代码<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="keyword">bytes</span>: [CChar] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">let data = NSData(<span class="keyword">bytes</span>: &amp;<span class="keyword">bytes</span>, <span class="built_in">length</span>:sizeof(CChar) * <span class="keyword">bytes</span>.count)</span><br></pre></td></tr></table></figure></p>
+<p>我突发奇想的在Playground在敲了这两段代码<br><img src="/images/chengxu.png" alt="Alt text"><br>输出结果：<br><img src="/images/jieguo.png" alt="Alt text"><br>如果直接引用数据流将能够正确序列化出来</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确转化</span></span><br><span class="line"><span class="keyword">var</span> imageByte = jsonData[<span class="string">"info"</span>]</span><br><span class="line"><span class="keyword">let</span> imageData = <span class="type">NSData</span>(bytes: &amp;imageByte, length: <span class="built_in">sizeof</span>(<span class="type">CChar</span>) * imageByte.<span class="built_in">count</span>)</span><br><span class="line">iconView.image = <span class="type">UIImage</span>(data: imageData)</span><br></pre></td></tr></table></figure>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>今天几乎花了一天纠结在这个问题上 凸现出来的问题是基本知识不够扎实，细节处理的不好，很多知识点也只有用到才会引起注意，也需要日后的不断积累。</p>
+
       
     </div>
     
