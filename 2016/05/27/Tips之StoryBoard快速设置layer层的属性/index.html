@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>[iOS构建版本] | Looperwb’s blog</title>
+  <title>Tips之StoryBoard快速设置layer层的属性 | Looperwb’s blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -222,34 +222,43 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2016-04-05T02:33:47.000Z" itemprop="datePublished">
-          2016-04-05
+      <time datetime="2016-05-27T08:46:20.000Z" itemprop="datePublished">
+          2016-05-27
       </time>
     
 </span>
-                <h1>[iOS构建版本]</h1>
+                <h1>Tips之StoryBoard快速设置layer层的属性</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<p>在日常开发中设置圆角和边框等属性经常出现，如果我们要实现一个带边框的圆角按钮，</p>
+<ul>
+<li>通过代码对其进行设置</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btn.layer.cornerRadius = <span class="number">5</span></span><br><span class="line">btn.layer.borderColor = UIColor.blueColor.CGColor</span><br><span class="line">btn.layer.borderWidth = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接在<code>Storyboard</code>的设置面板直接设置<code>runtime attributes</code>，设置对应的<strong>Key Path</strong>、<strong>Type</strong>、<strong>Value</strong>，但是如果要设置边框颜色的话会失效，因为<code>layer.bordColor</code>这个属性的<strong>Type</strong>是<strong>CGColor</strong>，但是这里的<strong>Type</strong>并没有该类型。使用<code>runtime attributes</code>设置的话还有一点不友好的地方就是没有自动提醒功能，这就要迫使你去强记<strong>layer</strong>的一些属性了</li>
+</ul>
+<ul>
+<li>还有一种办法就是拓展UIView，利用<code>extension</code>和<code>@IBInspectable</code>直接在<code>Storyboard</code>的设置面板生产该属性的设置功能</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">extension UIView &#123;</span><br><span class="line">    @IBInspectable var cornerRadius: CGFloat &#123;</span><br><span class="line">        set &#123;</span><br><span class="line">            layer.cornerRadius = newValue</span><br><span class="line">            layer.masksToBounds = newValue &gt; 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        get &#123;</span><br><span class="line">            return layer.cornerRadius</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @IBInspectable var borderWidth: CGFloat &#123;</span><br><span class="line">        set &#123;</span><br><span class="line">            layer.borderWidth = newValue</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        get &#123;</span><br><span class="line">            return layer.borderWidth</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @IBInspectable var borderColor: UIColor? &#123;</span><br><span class="line">        set &#123;</span><br><span class="line">            layer.borderColor = newValue?.CGColor</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        get &#123;</span><br><span class="line">            return layer.borderColor != nil ? UIColor(CGColor: layer.borderColor!) : nil</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>被标记成<code>@IBInspectable</code>的属性会直接显示在<code>Storyboard</code>上，并且所用继承自<strong>UIView</strong>的控件都可以直接在<code>Storyboard</code>上设置这几个属性</p>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2016/05/27/Tips之StoryBoard快速设置layer层的属性/" style="float: left;">
-        ← Tips之StoryBoard快速设置layer层的属性
-    </a>
     
-    
-    <a class="pull-right" href="/2016/03/15/头像更换引发的一些问题/">
-        头像更换引发的一些问题 →
+    <a class="pull-right" href="/2016/04/05/iOS构建版本/">
+        [iOS构建版本] →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="2016/04/05/iOS构建版本/" data-title="[iOS构建版本]" data-url="http://yoursite.com/2016/04/05/iOS构建版本/"></div>
+<div class="ds-thread" data-thread-key="2016/05/27/Tips之StoryBoard快速设置layer层的属性/" data-title="Tips之StoryBoard快速设置layer层的属性" data-url="http://yoursite.com/2016/05/27/Tips之StoryBoard快速设置layer层的属性/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"duoshuo_name"};
 (function() {
