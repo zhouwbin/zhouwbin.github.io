@@ -349,6 +349,10 @@ a.custom-button span {
 	text-transform: uppercase;
 	border: none;
 }
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
 .btn-lg {
   padding: 25px
 }
